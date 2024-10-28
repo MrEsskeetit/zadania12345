@@ -1,27 +1,14 @@
-import readline from 'readline'
+import fs from 'fs'
+                
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-
+fs.watch("./", (eventType, filename)=>{
+    if(filename){
+        try{
+        fs.appendFileSync(`wykryto zdazenie ${eventType} w pliku ${filename}\n`)
+    } catch (error){
+        console.error(`blad zapisu`)
+    }
+    }
 })
 
-function askQuestion(yourQuestion, cb){
-    rl.question(yourQuestion, answer=>{
-        cb(answer)
-    })
-}
-
-let name = ''
-let age = ''
-
-askQuestion("jak masz na imie ", answerName =>{
-    name=answerName
-
-    askQuestion("ile masz lat ", answerAge =>{
-        age=answerAge
-        console.log("twoje imie to ", name `masz ${age}`)
-
-        rl.close()
-    })
-})
+console.log("nasluchwanie zmian")
