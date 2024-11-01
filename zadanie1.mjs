@@ -1,6 +1,6 @@
 import fs from 'fs'
                 
-fs.watch("./OdpZad1.txt", (eventType, filename)=>{
+fs.watch("./", (eventType, filename)=>{
     if(filename){
         try{
         fs.appendFileSync('./zapis',`wykryto zdazenie ${eventType} w pliku ${filename}\n`)
